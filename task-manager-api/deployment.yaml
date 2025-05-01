@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: task-api
-          image: 199978211718.dkr.ecr.us-east-1.amazonaws.com/denning/task-manager:latest
+          image: <IMAGE_URI>:latest
           ports:
             - containerPort: 8080

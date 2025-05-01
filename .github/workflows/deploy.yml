@@ -18,7 +18,8 @@ jobs:
           distribution: corretto
           java-version: '17'
 
-      - name: Build JAR
+      - name: Build JAR for task-manager-api
+        working-directory: ./task-manager-api
         run: mvn clean package
 
       - name: Configure AWS credentials

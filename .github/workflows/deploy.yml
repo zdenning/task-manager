@@ -1,5 +1,5 @@
 name: Deploy to EKS
- 
+
 on:
   push:
     branches: [ main ]
@@ -33,6 +33,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build, tag, and push image
+        working-directory: ./task-manager-api
         env:
           ECR_REPO: ${{ secrets.ECR_REPOSITORY }}
         run: |
@@ -42,6 +43,7 @@ jobs:
           echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
 
       - name: Update Kubernetes manifests
+        working-directory: ./task-manager-api
         run: |
           sed -i "s|<IMAGE_URI>|${IMAGE_URI}|g" deployment.yaml
 
@@ -55,6 +57,7 @@ jobs:
           aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
 
       - name: Apply manifests
+        working-directory: ./task-manager-api
         run: |
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml

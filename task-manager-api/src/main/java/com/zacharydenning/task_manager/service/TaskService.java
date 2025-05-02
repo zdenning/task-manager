@@ -42,6 +42,17 @@ public class TaskService
     }
 
 
+    /**
+     * Create a new task.
+     *
+     * @param description
+     *              the task description
+     * @param title
+     *              the task title
+     * @param dueDate
+     *              the task dueDate
+     * @return the newly create task from the DB
+     */
     public Task createTask(final String description, final String title, final OffsetDateTime dueDate)
     {
         final TaskItem taskItem = new TaskItem();

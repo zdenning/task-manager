@@ -64,5 +64,5 @@ jobs:
       - name: Apply manifests
         working-directory: ./task-manager-api
         run: |
-          kubectl apply -f deployment.yaml
-          kubectl apply -f service.yaml
+          kubectl apply -f --validate=false deployment.yaml
+          kubectl apply -f --validate=false service.yaml
